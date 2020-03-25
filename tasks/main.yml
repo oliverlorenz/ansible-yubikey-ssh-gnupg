@@ -36,3 +36,5 @@
     state: present
     line: "gpgconf --launch gpg-agent"
     regexp: "^gpgconf --launch"
+
+- shell: gpg-connect-agent reloadagent /bye
