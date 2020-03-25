@@ -1,0 +1,5 @@
+galaxy_info:
+  author: Oliver Lorenz
+  description: installs yubikey stuff to work with with gpg and ssh
+  license: MIT
+  min_ansible_version: 2.9

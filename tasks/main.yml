@@ -1,0 +1,38 @@
+# https://github.com/drduh/YubiKey-Guide#ssh
+- template:
+  src: templates/gpg-agent.conf.j2
+  dest: ~/.gnupg/gpg-agent.conf
+
+- apt:
+  name:
+    - gnupg2
+    - gnupg-agent
+    - dirmngr
+    - cryptsetup
+    - scdaemon
+    - pcscd
+    - secure-delete
+    - hopenpgp-tools
+    - yubikey-personalization
+  become: yes
+
+- lineinfile:
+  dest: "~/.bashrc"
+  create: yes
+  state: present
+  line: "export GPG_TTY=\"$(tty)\""
+  regexp: "^export GPG_TTY"
+
+- lineinfile:
+  dest: "~/.bashrc"
+  create: yes
+  state: present
+  line: "export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
+  regexp: "^export SSH_AUTH_SOCK"
+
+- lineinfile:
+  dest: "~/.bashrc"
+  create: yes
+  state: present
+  line: "gpgconf --launch gpg-agent"
+  regexp: "^gpgconf --launch"
