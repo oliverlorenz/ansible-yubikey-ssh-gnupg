@@ -1,7 +1,7 @@
 # https://github.com/drduh/YubiKey-Guide#ssh
 - template:
-  src: templates/gpg-agent.conf.j2
-  dest: ~/.gnupg/gpg-agent.conf
+    src: templates/gpg-agent.conf.j2
+    dest: ~/.gnupg/gpg-agent.conf
 
 - apt:
   name:
