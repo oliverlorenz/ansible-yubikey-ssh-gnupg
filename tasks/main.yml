@@ -39,7 +39,7 @@
     create: yes
     state: present
     line: "source ~/.profile_gpg_agent.sh"
-    regexp: "profile_gpg_agent.sh"
+    regexp: '^source ~\/\.profile_gpg_agent\.sh'
 
 - lineinfile:
     dest: "~/.bashrc"
