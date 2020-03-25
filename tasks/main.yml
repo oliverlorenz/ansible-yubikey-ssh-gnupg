@@ -18,7 +18,7 @@
 
 - template:
     src: templates/gpg-agent.conf.j2
-    ~dest: ~/.gnupg/gpg-agent.conf
+    dest: ~/.gnupg/gpg-agent.conf
 
 - lineinfile:
     dest: "~/.bashrc"
