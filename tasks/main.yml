@@ -30,6 +30,17 @@
     src: templates/gpg-agent.conf.j2
     dest: ~/.gnupg/gpg-agent.conf
 
+- template:
+  src: templates/profile_gpg_agent.source
+  dest: ~/.profile_gpg_agent.sh
+
+- lineinfile:
+    dest: "~/.profile"
+    create: yes
+    state: present
+    line: "source ~/.profile_gpg_agent.sh"
+    regexp: "profile_gpg_agent.sh"
+
 - lineinfile:
     dest: "~/.bashrc"
     create: yes
