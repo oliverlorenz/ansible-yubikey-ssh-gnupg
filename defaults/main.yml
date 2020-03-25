@@ -3,3 +3,4 @@ yubikey_enable_ssh: yes
 yubikey_pinentry_program: /usr/bin/pinentry-curses
 yubikey_default_cache_ttl: 60
 yubikey_max_cache_ttl: 120
+yubikey_gpg_keys_to_import: []

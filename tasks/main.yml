@@ -1,8 +1,4 @@
 # https://github.com/drduh/YubiKey-Guide#ssh
-- template:
-    src: templates/gpg-agent.conf.j2
-    dest: ~/.gnupg/gpg-agent.conf
-
 - apt:
     pkg:
     - gnupg2
@@ -15,6 +11,16 @@
     - hopenpgp-tools
     - yubikey-personalization
   become: yes
+
+- name: Add an apt key by id from a keyserver
+  apt_key:
+    keyserver: "{{ item.keyserver }}"
+    id: "{{ item.keyId }}"
+  with_items: "{{ yubikey_gpg_keys_to_import }}"
+
+- template:
+  src: templates/gpg-agent.conf.j2
+  dest: ~/.gnupg/gpg-agent.conf
 
 - lineinfile:
     dest: "~/.bashrc"
