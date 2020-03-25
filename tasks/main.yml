@@ -16,6 +16,16 @@
   shell: gpg --keyserver {{ item.keyserver }} --recv-keys {{ item.keyId }}
   with_items: "{{ yubikey_gpg_keys_to_import }}"
 
+- name: create ownertrust files
+  copy:
+    content: "{{ item.keyId }}:{{ item.trust }}:\n"
+    dest: /tmp/ownertrust_{{ item.keyId }}
+  with_items: "{{ yubikey_gpg_keys_to_import }}"
+
+- name: ensure ownertrust is imported
+  shell: gpg --import-ownertrust /tmp/ownertrust_{{ item.keyId }}
+  with_items: "{{ yubikey_gpg_keys_to_import }}"
+
 - template:
     src: templates/gpg-agent.conf.j2
     dest: ~/.gnupg/gpg-agent.conf
