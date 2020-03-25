@@ -12,15 +12,13 @@
     - yubikey-personalization
   become: yes
 
-- name: Add an apt key by id from a keyserver
-  apt_key:
-    keyserver: "{{ item.keyserver }}"
-    id: "{{ item.keyId }}"
+- name: ensure public keys are imported
+  shell: gpg --keyserver {{ item.keyserver }} --recv-keys {{ item.keyId }}
   with_items: "{{ yubikey_gpg_keys_to_import }}"
 
 - template:
     src: templates/gpg-agent.conf.j2
-    dest: ~/.gnupg/gpg-agent.conf
+    ~dest: ~/.gnupg/gpg-agent.conf
 
 - lineinfile:
     dest: "~/.bashrc"
